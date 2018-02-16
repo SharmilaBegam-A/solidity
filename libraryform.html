@@ -1,0 +1,468 @@
+<html>
+<head><h3><center><font color="red">LIBRARY MANAGEMENT FORM</font></center></h3>
+<meta charset="utf-8">
+<title>library management</title>
+<script src="web3.min.js"></script>
+
+<script>
+
+web3.eth.defaultAccount = web3.eth.accounts[0];
+var sybexcon = web3.eth.contract([
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "totalbooks",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "add",
+            "type": "address"
+          }
+        ],
+        "name": "put",
+        "outputs": [
+          {
+            "name": "",
+            "type": "string"
+          },
+          {
+            "name": "",
+            "type": "string"
+          },
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "isbnnums",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "idviews",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "_id",
+            "type": "uint256"
+          }
+        ],
+        "name": "setparty",
+        "outputs": [
+          {
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getfine",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "isbnno",
+            "type": "uint256"
+          }
+        ],
+        "name": "availablebooks",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "givenbook",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "isbnno",
+            "type": "uint256"
+          }
+        ],
+        "name": "bookkret",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "add",
+            "type": "address"
+          },
+          {
+            "name": "bname",
+            "type": "string"
+          },
+          {
+            "name": "auname",
+            "type": "string"
+          },
+          {
+            "name": "isbnno",
+            "type": "uint256"
+          }
+        ],
+        "name": "get",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_id",
+            "type": "uint256"
+          },
+          {
+            "name": "namep",
+            "type": "string"
+          }
+        ],
+        "name": "getparty",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      }
+    ]);
+var sybex = sybexcon.at('0x0bb8a05ac7d9234a5aab2d67fa32b4d79f313348');
+
+function gets()
+{
+alert("hello");
+var a = document.getElementById("txt1").value;
+var b = document.getElementById("txt2").value;
+var c = document.getElementById("txt3").value;
+var d = document.getElementById("txt4").value;
+var x = sybex.get(a,b,c,d,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+function puts()
+{
+alert("hI");
+var pa = document.getElementById("txt5").value;
+sybex.put(pa,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+function getusers()
+{
+var ug = document.getElementById("txt6").value;
+var ua = document.getElementById("txt7").value;
+var gu = sybex.getparty(ug,ua,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+
+}
+
+function putusers()
+{
+var pu = document.getElementById("txt8").value;
+sybex.setparty(pu,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+
+
+function isbn()
+{
+sybex.isbnnums(function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+
+}
+
+
+function ids()
+{
+sybex.idviews(function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+
+}
+
+
+
+function totalbook()
+{
+sybex.totalbooks(function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+function bookavailable()
+{
+var ba = document.getElementById("txt9").value;
+sybex.availablebooks(ba,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+
+function given()
+{
+sybex.givenbook(function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+
+function bookreturn()
+{
+var rb = document.getElementById("txt11").value;
+sybex.bookkret(rb,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+
+function fine()
+{
+sybex.getfine(function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+</script>
+
+</head>
+
+<body>
+
+
+<table align="center" border=1px bordercolor="blue"  bgcolor="pink">
+<center><font color="brown"><strong>BOOK DETAILS<strong></center>
+
+<tr><td>
+<p>GET</p>
+ADDRESS:<input id="txt1" type="text">
+BOOKNAME:<input id="txt2" type="text">
+BOOKAUTHOR:<input id="txt3" type="text">
+ISBNNO:<input id="txt4" type="text">
+<input type="button" onclick="gets()" value="get"/>
+</td></tr>
+
+<tr><td>
+<p>PUT<p>
+ADDRESS:<input id="txt5" type="text">
+<input type="button" onclick="puts()" value="put"/>
+</td></tr>
+
+
+
+<tr><td>
+<p>ISBNTOTAL</p>
+<input type="button" onclick="isbn()" value="isbntotal"/>
+</td></tr>
+
+<tr><td>
+<p>TOTALBOOKS</p>
+<input type="button" onclick="totalbook()" value="TotalBooks"/>
+</td></tr>
+
+
+</table>
+
+
+<table align="center" border=1px bordercolor="blue"  bgcolor="pink">
+<center>USER DETAILS</center>
+<tbody>
+<tr><td>
+<p>USER</p>
+ID:<input id="txt6" type="text">
+NAME:<input id="txt7" type="text">
+<input type="button" onclick="getusers()" value="getuser"/>
+</td></tr>
+
+
+
+<tr><td>
+<p>USERDETAILS</p>
+ID:<input id="txt8" type="text">
+<input type="button" onclick="putusers()" value="userdetails"/>
+</td></tr>
+
+
+<tr><td>
+<p>IDTOTALS</p>
+<input type="button" onclick="ids()" value="idtotal"/>
+</td></tr>
+
+
+</table>
+
+
+
+
+<table align="center" border=1px bordercolor="blue"  bgcolor="pink">
+
+<center>BOOK DISTRIBUTION</center>
+
+
+<tr><td>
+<p>CHECK BOOK IS AVAILABLE</p>
+ISBNNO:<input id="txt9" type="text">
+<input type="button" onclick="bookavailable()" value="available"/>
+</td></tr>
+
+
+<tr><td>
+<p>GIVEN THE BOOKS</p>
+<input type="button" onclick="given()" value="givenbook"/>
+</td></tr>
+
+
+<tr><td>
+<p>RETURN BOOK</p>
+ISBNNO:<input id="txt11" type="text">
+<input type="button" onclick="bookreturn()" value="returnbook"/>
+</td></tr>
+
+
+<tr><td>
+<p>GETFINE</p>
+<input type="button" onclick="fine()" value="fineforlate"/>
+</td></tr>
+
+
+
+
+</table>
+
+
+
+
+</body>
+
+</html>
