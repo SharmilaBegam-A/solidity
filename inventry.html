@@ -1,0 +1,577 @@
+<html>
+<head><center><h1 style="color:green;"><font face="sans-serif"><marquee width=300"  scrollamount="30" scrolldelay="500">CHOCO CAFE</marquee></center><br>
+
+<style>
+body {
+    background-image: url("aaa.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%; 
+}
+h3
+{
+font-style: italic;
+}
+</style>
+
+<meta charset="utf-8">
+<title>inventry system</title>
+<script src="web3.min.js"></script>
+
+
+<script>
+
+web3.eth.defaultAccount = web3.eth.accounts[0];
+var sybexcon = web3.eth.contract([
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+          {
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_spender",
+            "type": "address"
+          },
+          {
+            "name": "_value",
+            "type": "uint256"
+          }
+        ],
+        "name": "approve",
+        "outputs": [
+          {
+            "name": "success",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "getdetails",
+        "outputs": [
+          {
+            "name": "",
+            "type": "bytes32[]"
+          },
+          {
+            "name": "",
+            "type": "uint256[]"
+          },
+          {
+            "name": "",
+            "type": "uint256[]"
+          },
+          {
+            "name": "",
+            "type": "uint256[]"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "_owner",
+            "type": "address"
+          }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "check",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "saledout",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "name": "",
+            "type": "bytes32"
+          },
+          {
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+          {
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "count",
+            "type": "uint256"
+          }
+        ],
+        "name": "requestitems",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_to",
+            "type": "address"
+          },
+          {
+            "name": "_value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "outputs": [
+          {
+            "name": "success",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "cnt",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "name",
+            "type": "bytes32"
+          },
+          {
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "name": "cost",
+            "type": "uint256"
+          },
+          {
+            "name": "avail",
+            "type": "uint256"
+          }
+        ],
+        "name": "setdetails",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "_owner",
+            "type": "address"
+          },
+          {
+            "name": "_spender",
+            "type": "address"
+          }
+        ],
+        "name": "allowance",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "tokentransfer",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      }
+    ]);
+var sybex = sybexcon.at('0x264bc2a24511077ddfc4097b56eb1eee4c33139b');
+
+var count=0;
+
+function set()
+{
+alert("hello");
+var a = document.getElementById("txt1").value;
+var b = document.getElementById("txt2").value;
+var c = document.getElementById("txt3").value;
+var d = document.getElementById("txt4").value;
+var x = sybex.setdetails(a,b,c,d,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert("error");
+            }
+        });
+}
+
+
+function get()
+{
+var count
+   sybex.cnt(function (error,result){
+            if (!error) {
+              count=result;
+        
+             } else {
+              alert("error");
+            }
+        });
+
+var y = sybex.getdetails(function (error,result){
+            if (!error) {
+        var a1=[];
+        var a2=[];
+        var a3=[];
+        var a4=[];
+            var f1=[];
+        var res=[];
+        
+        for(var j=0;j<count;j++)
+        {
+
+          var b1=result[0][j];
+              var s = '';
+        
+             for (var k = 0; k < b1.length; k += 2) 
+              {
+                  s+= String.fromCharCode(parseInt(b1.substr(k, 2), 16));
+
+               }
+        a1.push(s);
+              }
+
+        for(var i=0;i<count;i++){
+        var b2=result[1][i];
+        a2.push(b2);
+        }
+
+
+             for(var i=0;i<count;i++){
+        var b3=result[2][i];
+        a3.push(b3);
+        }
+  
+        for(var i=0;i<count;i++){
+        var c4=result[3][i];
+        a4.push(c4);
+        }
+
+        for(y=0;y<count;y++) {    
+
+       
+        res.push(" " +a1[y] +" -  "+a2[y]+" -  "+a3[y]+" -  "+a4[y]+ "<br/>");
+
+
+            }
+        document.getElementById("y").innerHTML=res;
+	
+                             
+            } else {
+              alert("error");
+            }
+        });
+}
+
+function ck()
+{
+
+var x = sybex.check(function (error,result){
+            if (!error) {
+              
+        document.getElementById("g").innerHTML=result;
+                             
+            } else {
+              alert("error");
+            }
+        });
+}
+
+
+
+function buy()
+{
+var f = document.getElementById("txt5").value;
+var g = document.getElementById("txt6").value;
+var w = sybex.requestitems(f,g,function (error,result){
+            if (!error) {
+              //alert(result);
+        
+                             
+            } else {
+              alert("error");
+            }
+        });
+}
+
+
+
+function saled()
+{
+alert("kk");
+var v = sybex.saledout(function (error,result){
+            if (!error) {
+var f1=[];
+var f2=[];
+var f3=[];
+var f4=[];
+var f5=[];
+var res1=[];
+
+        for(var i=0;i<1;i++){
+        var b2=result[0];
+        f5.push(b2);
+        }
+            for(var j=0;j<1;j++)
+        {
+
+          var b1=result[1];
+              var n = '';
+ 
+             for (var k = 0; k < b1.length; k += 2) 
+              {
+                  n+= String.fromCharCode(parseInt(b1.substr(k, 2), 16));
+
+               }
+        f1.push(n);
+        }
+
+        for(var i=0;i<1;i++){
+        var b2=result[2];
+        f2.push(b2);
+        }
+    for(var i=0;i<1;i++){
+        var b2=result[3];
+        f3.push(b2);
+        }
+    for(var i=0;i<1;i++){
+        var b2=result[4];
+        f4.push(b2);
+        }
+    
+             
+              for(var t=0;t<1;t++) {
+        res1.push(" " + f5[t]+" -  "+f1[t]+" -  "+f2[t]+" -  "+f3[t] + " - "+f4[t] + " ");
+        
+            }  
+    document.getElementById("r").innerHTML=res1;
+
+}
+             
+            
+         else {
+              alert("error");
+            }
+        });
+
+    
+}
+
+
+function ethers()
+{
+        alert("jjj");
+        var eth=document.getElementById("txt7").value;
+        eth=web3.toWei(eth, "ether");
+        web3.eth.defaultAccount=document.getElementById("txt8").value;
+        sybex.tokentransfer({value:eth}, function(err, result){ if(!err) 
+
+alert(result);
+
+}); 
+}
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<form>
+<table border=1px bordercolor = "blue" align="center">
+<thead><center><h3 style="color:red;">DETAILS OF PRODUCT</h3></center></thead>
+<tbody>
+<tr>
+<td><input id="txt1" type="text" placeholder="product name"></td>
+<td><input id="txt2" type="text" placeholder="product id"></td>
+<td><input id="txt3" type="text" placeholder="product cost"></td>
+<td><input id="txt4" type="text" placeholder="product available"></td>
+<td><input type="button" style="background-color:pink" onclick="set()" value="setdetails"/></td>
+</tr>
+
+</tbody>
+</table>
+
+
+
+<br><center><input type="button" style="background-color:pink" onclick="get()" value="getdetails"/></center>
+
+
+<br><center><input type="button" style="background-color:pink" onclick="ck()" value="totalproducts"/></td></center>
+
+
+
+
+
+
+
+<table border=1px bordercolor = "blue" align="center">
+<thead><center><h3 style="color:red;"><p>BUYING THE PRODUCTS</p></h3></center></thead>
+<tbody>
+<tr>
+<td><input id="txt5" type="text" placeholder="product id"></td>
+<td><input id="txt6" type="text" placeholder="product count"></td>
+<td><input type="button" style="background-color:pink" onclick="buy()" value="buyingproducts"/></td>
+</tr>
+
+</tbody>
+</table>
+
+<br><center><input type="button" style="background-color:pink" onclick="saled()" value="saledouts"/></center>
+
+
+
+
+
+<table border=1px bordercolor = "blue" align="center">
+<thead><center><h3 style="color:red;"><p><p>ETHER TRANSFER</p></p></h3></center></thead>
+<tbody>
+<tr>
+<td><input id="txt7" type="text" placeholder="value"></td>
+<td><input id="txt8" type="text" placeholder="account"></td>
+<td><input type="button" style="background-color:pink" onclick="ethers()" value="transferether"/></td>
+</tbody>
+</table>
+
+
+
+</form>
+<center><h1 style="color:red" id="y"></center>
+<center><h1 style="color:red" id="g"></center>
+<center><h1 style="color:red" id="r"></center>
+
+
+
+
+
+</body>
+
+
+</html>
